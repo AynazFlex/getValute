@@ -27,7 +27,7 @@ table {
     border-spacing: 0px;
 }
 
-table thead tr {
+table thead tr, .head {
     color: #ffffff; 
     font-weight: bold; 
     background: #c83240;
@@ -59,10 +59,24 @@ table tbody tr:hover {
     font-size: 18px;
     position: fixed;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-    padding: 4px 8px;
-    background-color: white;
-    color: black;
-    border-radius: 4px;
+    padding: 4px 8px 4px 24px;
+    background-color: black;
+    color: white;
+    border-radius: 0 4px 4px 4px;
+}
+
+.tooltip::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    left: 7px;
+    top: -7px;
+    transform-origin: 0 0;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+    background-color: black;
 }
 
 .close {
@@ -87,4 +101,10 @@ table tbody tr:hover {
 
 .item:hover {
     background: rgb(189, 189, 189); 
+}
+
+.head {
+    text-align: center;
+    font-size: 18px;
+    padding: 10px 0;
 }

@@ -24,7 +24,7 @@ const createTable = (obj) => {
       `<tr data-id=${key} data-tooltip="${Name} ${CharCode}">
             <td>${NumCode}</td>
             <td>${Value}</td>
-            <td>${(Value / Previous) * 100 - 100}</td>
+            <td>${((Value - Previous) / Previous) * 100}</td>
         </tr>`
     );
   }
@@ -48,8 +48,8 @@ table1.onmouseover = (e) => {
   tooltip.classList.remove("close");
   tooltip.textContent = elem.dataset.tooltip;
   table1.onmousemove = (event) => {
-    tooltip.style.left = event.clientX + 20 + "px";
-    tooltip.style.top = event.clientY + 20 + "px";
+    tooltip.style.left = event.clientX - 3 + "px";
+    tooltip.style.top = event.clientY + 30 + "px";
   };
 };
 
@@ -59,8 +59,8 @@ document.body.onclick = (e) => {
   list.innerHTML = '';
   if (!e.target.closest("tbody")) return;
   let elem = e.target.closest("tr");
+  list.innerHTML = '<div class="head">Дата: Курс в рублях<div>'
   prevDays.forEach((value, key) => {
-    console.log(key, value[elem.dataset.id].Value);
     list.insertAdjacentHTML(
         "beforeend", 
         `<div class='item'>
