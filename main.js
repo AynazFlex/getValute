@@ -2,6 +2,7 @@
 
 const url1 = "https://www.cbr-xml-daily.ru/daily_json.js";
 const table1 = document.getElementById("table1");
+const tbody1 = document.getElementById("tbody1");
 const tooltip = document.querySelector(".tooltip");
 const list = document.querySelector(".prevdays");
 let prevDays = new Map();
@@ -10,7 +11,6 @@ const getData = async (url) => {
   let response = await fetch(url);
   let result = await response.json();
   createTable(result.Valute);
-  //console.log(result.Valute);
   return result.PreviousURL;
 };
 
@@ -48,23 +48,29 @@ table1.onmouseover = (e) => {
   tooltip.classList.remove("close");
   tooltip.textContent = elem.dataset.tooltip;
   table1.onmousemove = (event) => {
-    tooltip.style.left = event.clientX - 3 + "px";
-    tooltip.style.top = event.clientY + 30 + "px";
+    tooltip.style.left = event.clientX + 10 + "px";
+    tooltip.style.top = event.clientY + 20 + "px";
   };
 };
 
 table1.onmouseout = () => tooltip.classList.add("close");
 
 document.body.onclick = (e) => {
-  list.innerHTML = '';
-  if (!e.target.closest("tbody")) return;
-  let elem = e.target.closest("tr");
-  list.innerHTML = '<div class="head">Дата: Курс в рублях<div>'
-  prevDays.forEach((value, key) => {
-    list.insertAdjacentHTML(
-        "beforeend", 
-        `<div class='item'>
-            ${key}: ${value[elem.dataset.id].Value}
-        </div>`);
-  });
+  if (e.target.closest("tbody") && table1.contains(e.target)) {
+    let elem = e.target.closest("tr");
+    list.classList.remove("close");
+    tbody1.innerHTML = '';
+    prevDays.forEach((value, key) => {
+      tbody1.insertAdjacentHTML(
+        "beforeend",
+        `<td>${key}</td>
+        <td>${value[elem.dataset.id].Value}</td>`
+      );
+    });
+  }
+
+  if(e.target.closest('.prevdays_close-button')) {
+    list.classList.add("close");
+    tbody1.innerHTML = '';
+  }
 };
