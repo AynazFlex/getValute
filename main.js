@@ -74,3 +74,22 @@ document.body.onclick = (e) => {
     tbody1.innerHTML = '';
   }
 };
+
+list.onmousedown = e => {
+  let deltaX = e.clientX - list.getBoundingClientRect().left;
+  let deltaY = e.clientY - list.getBoundingClientRect().top;
+
+  console.log(deltaX, deltaY);
+
+  document.body.onmousemove = event => {
+    event.preventDefault();
+    console.log(event.clientX - deltaX + 'px');
+    list.style.left = event.clientX - deltaX  + 'px';
+    list.style.top = event.clientY - deltaY  + 'px';
+  }
+
+  list.onmouseup = () => {
+    document.body.onmousemove = null;
+    list.onmouseup = null;
+  }
+}

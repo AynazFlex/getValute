@@ -25,6 +25,7 @@ table {
     border-radius: 6px; 
     border-collapse: separate; 
     border-spacing: 0px;
+    cursor: pointer;
 }
 
 table thead tr, .head {
@@ -36,7 +37,6 @@ table thead tr, .head {
 table tr td {
     border-right: 1px solid #dfdfdf;
     padding: 8px 16px;
-    cursor: pointer;
 }
 
 table tr td:last-child {
@@ -76,6 +76,10 @@ table tbody tr:hover {
     background: white;
     box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
     color: black;
+}
+
+.prevdays table {
+    cursor: move !important;
 }
 
 .item {
